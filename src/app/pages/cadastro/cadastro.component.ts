@@ -24,6 +24,12 @@ export class CadastroComponent {
     private router: Router
   ) { }
 
+  mostrandoSenha: boolean = false;
+
+  mostrarSenha(): void {
+    this.mostrandoSenha = !this.mostrandoSenha;
+  }
+
   cadastrar(){
     this.usuarioService.cadastrar(this.novoUsuario).subscribe({
       next: (response: any) => {

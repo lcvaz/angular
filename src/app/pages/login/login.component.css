@@ -54,10 +54,14 @@ form {
     position: absolute;
     right: 15px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) scale(2);
     font-size: 20px;
     color: #999;
     cursor: pointer;
+}
+
+.toggle-password-show {
+    color: #10b981;
 }
 
 input[type="email"],

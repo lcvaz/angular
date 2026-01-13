@@ -14,6 +14,7 @@ import { Usuario } from '../../interfaces/usuario';
 })
 export class LoginComponent {
 
+
   usuario: Usuario = {
     email: '',
     senha: ''
@@ -25,5 +26,13 @@ export class LoginComponent {
     private router: Router
   ) { }
 
+
+  mostrandoSenha: boolean = false;
+
+  mostrarSenha(): void {
+    this.mostrandoSenha = !this.mostrandoSenha;
+  }
+
   login() {}
+
 }

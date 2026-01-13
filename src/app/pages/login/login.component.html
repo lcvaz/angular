@@ -19,13 +19,13 @@
         <div class="input-wrapper">
             <span class="input-icon">🔒</span>
             <input 
-                type="password" 
+                [type]="mostrandoSenha ? 'text' : 'password'" 
                 id="password" 
                 name="password" 
                 [(ngModel)]="usuario.senha"
                 placeholder="Senha" 
                 required>
-            <span class="toggle-password">👁️</span>
+            <span (click)="mostrarSenha()"></span>
         </div>
         
         <!-- Lembrar-me e Esqueceu a senha -->

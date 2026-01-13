@@ -29,13 +29,13 @@
         <div class="input-wrapper">
             <span class="input-icon">🔒</span>
             <input 
-                type="password" 
+                [type]="mostrandoSenha ? 'text' : 'password'" 
                 id="password" 
                 name="password" 
                 [(ngModel)]="novoUsuario.senha"
                 placeholder="Senha" 
                 required>
-            <span class="toggle-password">👁️</span>
+            <span class="toggle-password"></span>
         </div>
 
         <!-- Botão de Cadastro -->
