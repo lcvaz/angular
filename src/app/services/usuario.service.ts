@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginRequest, LoginResponse, Usuario } from '../interfaces/usuario';
-import { Observable, tap } from 'rxjs';
+import { LoginRequest, LoginResponse, UsuarioCadastro } from '../interfaces/usuario';
+import { catchError, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,31 +11,33 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  cadastrar(usuario: Usuario): Observable<LoginResponse> {
+  cadastrar(usuario: UsuarioCadastro) {
     return this.http.post(this.apiUrl, usuario);
   }
 
-  login(usuario: Usuario): Observable<LoginResponse> {
-    const loginData: LoginRequest = {
-      email: usuario.email,
-      senha: usuario.senha,
-      lembrarMe: false  // Default value, can be changed based on UI logic
-    };
+  login(usuario: LoginRequest) {
 
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, loginData).pipe(
+    console.log('Lembrar Me:', usuario.lembrarMe);
+    console.log('email:', usuario.email);
+
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, usuario).pipe(
       tap(response => {
         // Salva o token
-        if (lembrarMe) {
+        if (usuario.lembrarMe) {
           // localStorage = permanente (sobrevive ao fechar o navegador)
           localStorage.setItem('token', response.token);
-          localStorage.setItem('usuario', JSON.stringify(response.usuario));
+          localStorage.setItem('usuario', JSON.stringify(response.usuario.id));
           localStorage.setItem('lembrarMe', 'true');
         } else {
           // sessionStorage = temporário (apaga ao fechar o navegador)
           sessionStorage.setItem('token', response.token);
-          sessionStorage.setItem('usuario', JSON.stringify(response.usuario));
+          sessionStorage.setItem('usuario', JSON.stringify(response.usuario.id));
         }
-      })
+      }), 
+      catchError(error => {
+        console.error('Erro no login capturado no service:', error);
+        return throwError(() => error); // Repassa o erro para o componente
+  })
     );
   }
 

@@ -26,6 +26,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
-
+1. Verificar se o uso do .tap está correto no service
+2. Verificar lógica de verificação do token do usuário que antes havia selecionado "Lembrar-me"
+3. Terminar lógica de cadastrar
+4. Adicionar local no HTML para receber os avisos quando tiver
 
 configurar o BACKEND para receber a requisição do login e retornar o token de 30 dias caso o usuário selecione "Lembrar-me" .
+confirgurar o BACKEND para retornar o status da requisição de login 

@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { UsuarioCadastro } from '../../interfaces/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
@@ -16,7 +16,8 @@ export class CadastroComponent {
   novoUsuario: UsuarioCadastro = {
     nome: '',
     email: '',
-    senha: ''
+    senha: '',
+    dataCadastro: new Date()
   };
 
   constructor(

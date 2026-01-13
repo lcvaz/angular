@@ -40,10 +40,34 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']); // Redireciona para o dashboard após o login
       },
       error: (error) => {
-        console.error('Erro no login:', error);
-        alert('Falha no login. Verifique suas credenciais e tente novamente.');
+        this.tratarErroLogin(error);
       }
     });
   }
 
+  errorMessage: string = ''; // Variável para mostrar no HTML
+
+  private tratarErroLogin(error: any) {
+  // O 'status' é o código HTTP retornado pelo backend
+    switch(error.status) {
+      case 401:
+        this.errorMessage = 'Usuário ou senha incorretos.';
+        break;
+      case 403:
+        this.errorMessage = 'Sua conta está bloqueada ou sem permissão.';
+        break;
+      case 404:
+        this.errorMessage = 'Servidor de login não encontrado.';
+        break;
+      case 500:
+        this.errorMessage = 'Erro interno no servidor. Tente novamente mais tarde.';
+        break;
+      case 0:
+        this.errorMessage = 'Sem conexão com a internet ou API fora do ar.';
+        break;
+      default:
+        // Tenta pegar a mensagem que veio do backend, se existir
+        this.errorMessage = error.messagem || 'Ocorreu um erro desconhecido.';
+    }
+  }
 }

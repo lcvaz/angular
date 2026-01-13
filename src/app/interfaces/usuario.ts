@@ -3,7 +3,7 @@ export interface UsuarioCadastro {
     nome?: string,
     email: string,
     senha: string,
-    dataCadastro?: Date;
+    dataCadastro: Date;
 }
 
 export interface LoginRequest {
@@ -16,4 +16,5 @@ export interface LoginResponse {
     token: string;
     usuario: UsuarioCadastro;
     expiresIn?: number;  // Tempo de expiração em segundos
+    status: number;
 }
