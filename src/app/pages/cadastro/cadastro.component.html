@@ -1,0 +1,44 @@
+<section >
+    <h1>Cadastre-se</h1>
+    <form (ngSubmit)="cadastrar()">
+        <!-- Campo de Nome -->
+        <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                [(ngModel)]="novoUsuario.nome"
+                placeholder="Seu nome completo" 
+                required>
+        </div>
+        
+        <!-- Campo de Email -->
+        <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                [(ngModel)]="novoUsuario.email"
+                placeholder="seu@email.com" 
+                required>
+        </div>
+
+        <!-- Campo de Senha -->
+        <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                [(ngModel)]="novoUsuario.senha"
+                placeholder="Senha" 
+                required>
+            <span class="toggle-password">👁️</span>
+        </div>
+
+        <!-- Botão de Cadastro -->
+        <button type="submit" class="btn-login">Cadastrar</button>
+    </form>
+</section>

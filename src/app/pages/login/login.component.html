@@ -1,0 +1,49 @@
+<section>
+    <h1>Bem vindo de volta!</h1>
+    <h3>Entre com sua conta para continuar</h3>
+    
+    <form (ngSubmit)="login()">
+        <!-- Campo de Email -->
+        <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input 
+                type="email" 
+                id="username" 
+                name="username" 
+                [(ngModel)]="usuario.email"
+                placeholder="seu@email.com" 
+                required>
+        </div>
+        
+        <!-- Campo de Senha -->
+        <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                [(ngModel)]="usuario.senha"
+                placeholder="Senha" 
+                required>
+            <span class="toggle-password">👁️</span>
+        </div>
+        
+        <!-- Lembrar-me e Esqueceu a senha -->
+        <div class="options-row">
+            <label class="remember-me">
+                <input type="checkbox" id="remember">
+                <span>Lembrar-me</span>
+            </label>
+            <a href="#" class="forgot-password">Esqueceu a senha?</a>
+        </div>
+        
+        <!-- Botão de Login -->
+        <button type="submit" class="btn-login">Entrar</button>
+    </form>
+    
+    <!-- Link de Cadastro -->
+    <p class="signup-text">
+        Não tem uma conta? 
+        <a routerLink="/cadastro-component" class="signup-link">Cadastre-se</a>
+    </p>
+</section>
