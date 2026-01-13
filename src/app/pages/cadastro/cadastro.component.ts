@@ -1,5 +1,5 @@
 import { Component, Input, Output } from '@angular/core';
-import { Usuario } from '../../interfaces/usuario';
+import { UsuarioCadastro } from '../../interfaces/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cadastro.component.css'
 })
 export class CadastroComponent {
-  novoUsuario: Usuario = {
+  novoUsuario: UsuarioCadastro = {
     nome: '',
     email: '',
     senha: ''
@@ -32,7 +32,7 @@ export class CadastroComponent {
 
   cadastrar(){
     this.usuarioService.cadastrar(this.novoUsuario).subscribe({
-      next: (response: any) => {
+      next: (response) => {
         console.log('Usuário cadastrado com sucesso:', response);
         alert('Cadastro realizado com sucesso!');
         this.router.navigate(['/login']);
