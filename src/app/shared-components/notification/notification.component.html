@@ -2,7 +2,8 @@
   <div 
     *ngFor="let notification of notifications" 
     class="notification notification-{{notification.type}}"
-    [@slideIn]>
+    [class.closing]="notification.isClosing"
+  >
     
     <div class="notification-content">
       <span class="notification-icon">{{ getIcon(notification.type) }}</span>

@@ -98,8 +98,16 @@ export class NotificationService {
 
   remove(id: string) {
     const currentNotifications = this.notificationsSubject.value;
-    const filtered = currentNotifications.filter(n => n.id !== id); // Método de array que cria um novo array com elementos que passam no teste
-    this.notificationsSubject.next(filtered); // Atualiza o BehaviorSubject com a lista filtrada
+    const updatedNotifications = currentNotifications.map(notification => //map() = Cria um NOVO array transformando cada elemento
+      notification.id === id 
+        ? { ...notification, isClosing: true }  // Marca como saindo
+        : notification
+    );
+
+    setTimeout(() => {
+      const filtered = this.notificationsSubject.value.filter(n => n.id !== id);
+      this.notificationsSubject.next(filtered);
+    }, 300); // ← Tempo da animação CSS
   }
 
   clear() {
