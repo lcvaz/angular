@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { UsuarioCadastro } from '../../interfaces/usuario';
 import { UsuarioService } from '../../services/usuario.service';
+import { NotificationService } from '../../services/notification.service';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -22,6 +23,7 @@ export class CadastroComponent {
 
   constructor(
     private usuarioService: UsuarioService,
+    private notificationService: NotificationService,
     private router: Router
   ) { }
 
@@ -35,12 +37,15 @@ export class CadastroComponent {
     this.usuarioService.cadastrar(this.novoUsuario).subscribe({
       next: (response) => {
         console.log('Usuário cadastrado com sucesso:', response);
-        alert('Cadastro realizado com sucesso!');
-        this.router.navigate(['/login']);
+        this.notificationService.success('Cadastro realizado com sucesso!');
+
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 500); // Aguarda 500ms antes de navegar
       },
       error: (erro: any) => {
         console.error('Erro ao cadastrar usuário:', erro);
-        alert('Erro ao cadastrar! Verifique os dados.');
+        this.notificationService.handleHttpError(erro);
       }
     });
   }

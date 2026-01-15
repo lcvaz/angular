@@ -99,10 +99,13 @@ export class NotificationService {
   remove(id: string) {
     const currentNotifications = this.notificationsSubject.value;
     const updatedNotifications = currentNotifications.map(notification => //map() = Cria um NOVO array transformando cada elemento
-      notification.id === id 
+      notification.id === id
         ? { ...notification, isClosing: true }  // Marca como saindo
         : notification
     );
+
+    // Emite o array atualizado com isClosing: true para ativar a animação CSS
+    this.notificationsSubject.next(updatedNotifications);
 
     setTimeout(() => {
       const filtered = this.notificationsSubject.value.filter(n => n.id !== id);
