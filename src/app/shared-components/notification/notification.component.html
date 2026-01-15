@@ -1,8 +1,7 @@
 <div class="notification-container">
-  <div 
-    *ngFor="let notification of notifications" 
-    class="notification notification-{{notification.type}}"
-    [@slideIn]>
+  <div
+    *ngFor="let notification of notifications"
+    class="notification notification-{{notification.type}}">
     
     <div class="notification-content">
       <span class="notification-icon">{{ getIcon(notification.type) }}</span>
