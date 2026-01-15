@@ -16,7 +16,7 @@ import { NotificationService } from '../../services/notification.service';
 export class LoginComponent {
 
 
-  usuario: LoginRequest = {
+  loginRequest: LoginRequest = {
     email: '',
     senha: '',
     lembrarMe: false
@@ -37,12 +37,12 @@ export class LoginComponent {
 
   login() {
 
-    if (!this.usuario.email || !this.usuario.senha) {
+    if (!this.loginRequest.email || !this.loginRequest.senha) {
       this.notificationService.warning('Preencha todos os campos!');
       return;
     }
 
-    this.usuarioService.login(this.usuario).subscribe({
+    this.usuarioService.login(this.loginRequest).subscribe({
       next: (response) => {
         console.log('Login bem-sucedido:', response);
         this.notificationService.success(`Bem-vindo, ${response.usuario.nome || 'usuário'}!`);

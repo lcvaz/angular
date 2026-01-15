@@ -104,10 +104,12 @@ export class NotificationService {
         : notification
     );
 
+    this.notificationsSubject.next(updatedNotifications);
+
     setTimeout(() => {
       const filtered = this.notificationsSubject.value.filter(n => n.id !== id);
       this.notificationsSubject.next(filtered);
-    }, 300); // ← Tempo da animação CSS
+    }, 500); // ← Tempo da animação CSS
   }
 
   clear() {
