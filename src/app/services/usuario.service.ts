@@ -41,6 +41,7 @@ export class UsuarioService {
     );
   }
 
+  /*
   isLogado(): boolean {
     return !!this.getToken();
   }
@@ -49,4 +50,5 @@ export class UsuarioService {
     // Verifica primeiro no localStorage, depois no sessionStorage
     return localStorage.getItem('token') || sessionStorage.getItem('token');
   }
+  */
 }
