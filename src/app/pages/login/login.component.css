@@ -1,3 +1,12 @@
+.body-login{
+    background-color: #10b9814e;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
 section {
     display: flex;
     flex-direction: column;
@@ -7,6 +16,9 @@ section {
     max-width: 500px;
     margin: auto;
     padding: 40px 20px;
+    border: white solid 2px;
+    background-color: #ffffff;
+    border-radius: 10px;
 }
 
 h1 {

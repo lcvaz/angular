@@ -4,6 +4,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -19,9 +20,10 @@ export class CadastroComponent {
     senha: '',
     dataCadastro: new Date()
   };
-
+  
   constructor(
     private usuarioService: UsuarioService,
+    private notificationService: NotificationService,
     private router: Router
   ) { }
 
@@ -32,15 +34,24 @@ export class CadastroComponent {
   }
 
   cadastrar(){
+
+    if (!this.novoUsuario.nome || !this.novoUsuario.email || !this.novoUsuario.senha) {
+      this.notificationService.warning('Preencha todos os campos!');
+      return;
+    }
+
     this.usuarioService.cadastrar(this.novoUsuario).subscribe({
       next: (response) => {
         console.log('Usuário cadastrado com sucesso:', response);
-        alert('Cadastro realizado com sucesso!');
-        this.router.navigate(['/login']);
+        this.notificationService.success('Cadastro realizado com sucesso! Faça login para continuar.');
+        
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 500); // Aguarda 500ms antes de navegar
       },
       error: (erro: any) => {
         console.error('Erro ao cadastrar usuário:', erro);
-        alert('Erro ao cadastrar! Verifique os dados.');
+        this.notificationService.handleHttpError(erro);
       }
     });
   }

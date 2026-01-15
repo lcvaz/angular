@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { LoginRequest } from '../../interfaces/usuario';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import { LoginRequest } from '../../interfaces/usuario';
 export class LoginComponent {
 
 
-  usuario: LoginRequest = {
+  loginRequest: LoginRequest = {
     email: '',
     senha: '',
     lembrarMe: false
@@ -23,6 +24,7 @@ export class LoginComponent {
 
   constructor(
     private usuarioService: UsuarioService,
+    private notificationService: NotificationService,
     private router: Router
   ) { }
 
@@ -34,40 +36,27 @@ export class LoginComponent {
   }
 
   login() {
-    this.usuarioService.login(this.usuario).subscribe({
+
+    if (!this.loginRequest.email || !this.loginRequest.senha) {
+      this.notificationService.warning('Preencha todos os campos!');
+      return;
+    }
+
+    this.usuarioService.login(this.loginRequest).subscribe({
       next: (response) => {
         console.log('Login bem-sucedido:', response);
-        this.router.navigate(['/dashboard']); // Redireciona para o dashboard após o login
+        this.notificationService.success(`Bem-vindo, ${response.usuario.nome || 'usuário'}!`);
+
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 500); // Aguarda 500ms antes de navegar
       },
+
       error: (error) => {
-        this.tratarErroLogin(error);
+        this.notificationService.handleHttpError(error);
       }
     });
-  }
 
-  errorMessage: string = ''; // Variável para mostrar no HTML
-
-  private tratarErroLogin(error: any) {
-  // O 'status' é o código HTTP retornado pelo backend
-    switch(error.status) {
-      case 401:
-        this.errorMessage = 'Usuário ou senha incorretos.';
-        break;
-      case 403:
-        this.errorMessage = 'Sua conta está bloqueada ou sem permissão.';
-        break;
-      case 404:
-        this.errorMessage = 'Servidor de login não encontrado.';
-        break;
-      case 500:
-        this.errorMessage = 'Erro interno no servidor. Tente novamente mais tarde.';
-        break;
-      case 0:
-        this.errorMessage = 'Sem conexão com a internet ou API fora do ar.';
-        break;
-      default:
-        // Tenta pegar a mensagem que veio do backend, se existir
-        this.errorMessage = error.messagem || 'Ocorreu um erro desconhecido.';
-    }
+    
   }
 }

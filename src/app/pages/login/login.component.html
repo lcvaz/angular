@@ -1,49 +1,51 @@
-<section>
-    <h1>Bem vindo de volta!</h1>
-    <h3>Entre com sua conta para continuar</h3>
-    
-    <form (ngSubmit)="login()">
-        <!-- Campo de Email -->
-        <div class="input-wrapper">
-            <span class="input-icon">📧</span>
-            <input 
-                type="email" 
-                id="username" 
-                name="username" 
-                [(ngModel)]="usuario.email"
-                placeholder="seu@email.com" 
-                required>
-        </div>
+<body class="body-login">
+    <section>
+        <h1>Bem vindo de volta!</h1>
+        <h3>Entre com sua conta para continuar</h3>
         
-        <!-- Campo de Senha -->
-        <div class="input-wrapper">
-            <span class="input-icon">🔒</span>
-            <input 
-                [type]="mostrandoSenha ? 'text' : 'password'" 
-                id="password" 
-                name="password" 
-                [(ngModel)]="usuario.senha"
-                placeholder="Senha" 
-                required>
-            <span (click)="mostrarSenha()"></span>
-        </div>
+        <form (ngSubmit)="login()">
+            <!-- Campo de Email -->
+            <div class="input-wrapper">
+                <span class="input-icon">📧</span>
+                <input 
+                    type="email" 
+                    id="username" 
+                    name="username" 
+                    [(ngModel)]="usuario.email"
+                    placeholder="seu@email.com" 
+                    required>
+            </div>
+            
+            <!-- Campo de Senha -->
+            <div class="input-wrapper">
+                <span class="input-icon">🔒</span>
+                <input 
+                    [type]="mostrandoSenha ? 'text' : 'password'" 
+                    id="password" 
+                    name="password" 
+                    [(ngModel)]="usuario.senha"
+                    placeholder="Senha" 
+                    required>
+                <span (click)="mostrarSenha()"></span>
+            </div>
+            
+            <!-- Lembrar-me e Esqueceu a senha -->
+            <div class="options-row">
+                <label class="remember-me">
+                    <input type="checkbox" [(ngModel)]="usuario.lembrarMe" id="remember">
+                    <span>Lembrar-me</span>
+                </label>
+                <a href="#" class="forgot-password">Esqueceu a senha?</a>
+            </div>
+            
+            <!-- Botão de Login -->
+            <button type="submit" class="btn-login">Entrar</button>
+        </form>
         
-        <!-- Lembrar-me e Esqueceu a senha -->
-        <div class="options-row">
-            <label class="remember-me">
-                <input type="checkbox" [(ngModel)]="usuario.lembrarMe" id="remember">
-                <span>Lembrar-me</span>
-            </label>
-            <a href="#" class="forgot-password">Esqueceu a senha?</a>
-        </div>
-        
-        <!-- Botão de Login -->
-        <button type="submit" class="btn-login">Entrar</button>
-    </form>
-    
-    <!-- Link de Cadastro -->
-    <p class="signup-text">
-        Não tem uma conta? 
-        <a routerLink="/cadastro" class="signup-link">Cadastre-se</a>
-    </p>
-</section>
+        <!-- Link de Cadastro -->
+        <p class="signup-text">
+            Não tem uma conta? 
+            <a routerLink="/cadastro" class="signup-link">Cadastre-se</a>
+        </p>
+    </section>
+</body>
