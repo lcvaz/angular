@@ -27,8 +27,14 @@ export class NotificationComponent implements OnInit {
 
   // Remove notificação ao clicar no X
   close(id: string | undefined) {
-    if (id) { // O if garante que só chama remove() quando tem um ID válido.
-      this.notificationService.remove(id);
+    if (id) {
+      const notification = this.notifications.find(n => n.id === id);
+      if (notification) {
+        notification.isClosing = true;
+        setTimeout(() => {
+          this.notificationService.remove(id);
+        }, 300);
+      }
     }
   }
 
