@@ -11,7 +11,7 @@
                     type="email" 
                     id="username" 
                     name="username" 
-                    [(ngModel)]="usuario.email"
+                    [(ngModel)]="loginRequest.email"
                     placeholder="seu@email.com" 
                     required>
             </div>
@@ -23,7 +23,7 @@
                     [type]="mostrandoSenha ? 'text' : 'password'" 
                     id="password" 
                     name="password" 
-                    [(ngModel)]="usuario.senha"
+                    [(ngModel)]="loginRequest.senha"
                     placeholder="Senha" 
                     required>
                 <span (click)="mostrarSenha()"></span>
@@ -32,7 +32,7 @@
             <!-- Lembrar-me e Esqueceu a senha -->
             <div class="options-row">
                 <label class="remember-me">
-                    <input type="checkbox" [(ngModel)]="usuario.lembrarMe" id="remember">
+                    <input type="checkbox" [(ngModel)]="loginRequest.lembrarMe" id="remember">
                     <span>Lembrar-me</span>
                 </label>
                 <a href="#" class="forgot-password">Esqueceu a senha?</a>
