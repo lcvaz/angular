@@ -7,7 +7,7 @@ import { catchError, tap, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:8080/api/usuarios';
+  private apiUrl = 'http://localhost:5074/api/usuario';
 
   constructor(private http: HttpClient) { }
 
@@ -16,9 +16,6 @@ export class UsuarioService {
   }
 
   login(usuario: LoginRequest) {
-
-    console.log('Lembrar Me:', usuario.lembrarMe);
-    console.log('email:', usuario.email);
 
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, usuario).pipe(
       tap(response => {
