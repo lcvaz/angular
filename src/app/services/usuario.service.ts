@@ -12,7 +12,11 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   cadastrar(usuario: UsuarioCadastro) {
-    return this.http.post(this.apiUrl, usuario);
+    return this.http.post<UsuarioCadastro>(`${this.apiUrl}/cadastrar`, usuario).pipe(
+      catchError(error => {
+        return throwError(() => error);
+      })
+    );
   }
 
   login(usuario: LoginRequest) {
